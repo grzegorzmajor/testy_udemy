@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MealTestAssertJ {
 
+    //in the class MealTestHamcrest are more methods
+
     @Test
     void shouldReturnDiscountedPrice() {
         //given

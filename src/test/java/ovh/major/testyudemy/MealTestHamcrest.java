@@ -6,7 +6,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MealTestHamcress {
+class MealTestHamcrest {
+
+
+    @Test
+    void whenDiscountIsHigherThanPriceShouldBeThrownException() {
+        //given
+        Meal meal = new Meal(49);
+
+        //when
+        //then
+        assertThrows(IllegalArgumentException.class,() -> meal.getDiscountedPrice(50));
+    }
 
     @Test
     void shouldReturnDiscountedPrice() {
