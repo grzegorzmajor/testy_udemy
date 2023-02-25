@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTestAssertJ {
 
+    //in the class MealTestHamcrest are more methods
+
     @Test
     void newAccountShouldNotBeActiveAfterCreation() {
         //given+when
