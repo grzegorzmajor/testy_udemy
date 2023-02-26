@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MealTestAssertJ {
+class MealAssertJTest {
 
-    //in the class MealTestHamcrest are more methods
+    //in the class MealHamcrestTest are more methods
 
     @Test
     void shouldReturnDiscountedPrice() {

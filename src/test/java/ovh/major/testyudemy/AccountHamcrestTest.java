@@ -1,22 +1,25 @@
 package ovh.major.testyudemy;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
-class AccountTestAssertJ {
+class AccountHamcrestTest {
 
-    //in the class AccountTestHamcrest are more methods
-
-    @Test
+    //@Test
+    @RepeatedTest(2)
     void newAccountShouldNotBeActiveAfterCreation() {
         //given+when
         Account newAccount = new Account();
 
         //then
         assertFalse(newAccount.isActive());
-        assertThat(newAccount.isActive()).isFalse();
+        assertThat(newAccount.isActive(), equalTo(false)); //hamcrest
+        assertThat(newAccount.isActive(), is(false)); //hamcrest
     }
 
     @Test
@@ -29,7 +32,7 @@ class AccountTestAssertJ {
 
         //then
         assertTrue(newAccount.isActive());
-        assertThat(newAccount.isActive()).isTrue();
+        assertThat(newAccount.isActive(), is(true));
     }
 
     @Test
@@ -42,8 +45,7 @@ class AccountTestAssertJ {
 
         //then
         assertNull(address);
-        assertThat(address).isNull();
-
+        assertThat(address, is(nullValue()));
     }
 
     @Test
@@ -58,8 +60,27 @@ class AccountTestAssertJ {
 
         //then
         assertNotNull(defaultAddress);
-        assertThat(defaultAddress).isNotNull();
+        assertThat(defaultAddress, is(notNullValue()));
+    }
 
+    @Test
+    void newAccountWithNotNullAddressShouldBeActive() {
+
+        // to jest przykład na zależności dla asercji czyli
+        // jesli asercja może byc spełniona tylko przy określonych warunkach
+        // tutaj na przykładzie wypełnionego adresu
+        // this test just for example
+
+        //given
+        Address address = new Address("Kościuszki", "31A/1");
+
+        //when
+        Account account = new Account(address);
+
+        //then
+        assumingThat(address != null, () -> {
+            assertTrue(account.isActive());
+        });
     }
 }
 
