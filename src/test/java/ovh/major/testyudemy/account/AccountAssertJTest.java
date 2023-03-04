@@ -1,4 +1,4 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.account;
 
 import org.junit.jupiter.api.Test;
 

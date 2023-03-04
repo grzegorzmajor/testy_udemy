@@ -1,14 +1,17 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.order;
 
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ovh.major.testyudemy.Meal;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OrderTest {
 
@@ -29,7 +32,7 @@ public class OrderTest {
 
         //then
         assertThat(order.getMeals(), empty());
-        assertThat(order.getMeals(), emptyCollectionOf(Meal.class));
+        MatcherAssert.assertThat(order.getMeals(), emptyCollectionOf(Meal.class));
     }
 
     @Test
@@ -102,6 +105,47 @@ public class OrderTest {
 
         //then
         assertThat(meals1, not(is(meals2)));
+    }
+
+    @Test
+    void orderTotalPriceShouldNotExceedsMaxIntValue() {
+        //given
+        Meal meal1 = new Meal(Integer.MAX_VALUE, "Parówki");
+        Meal meal2 = new Meal(Integer.MAX_VALUE, "Zestaw obiadowy grozy");
+
+        //when
+        order.addMealToOrder(meal1);
+        order.addMealToOrder(meal2);
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> order.totalPrice());
+
+    }
+
+    @Test
+    void emptyOrderTotalPriceShouldEqualZero()  {
+        //given
+        //order is created in beforeEach
+
+        //that
+        assertThat(order.totalPrice(),is(0));
+
+    }
+    @Test
+    void cancelingOrderShouldRemoveAllItemsFromList() {
+
+        //given
+        Meal meal1 = new Meal(Integer.MAX_VALUE, "Parówki");
+        Meal meal2 = new Meal(Integer.MAX_VALUE, "Zestaw obiadowy grozy");
+
+        //when
+        order.addMealToOrder(meal1);
+        order.addMealToOrder(meal2);
+        order.cancel();
+
+        //then
+        assertThat(order.getMeals().size(),is(0));
+
     }
 
 }

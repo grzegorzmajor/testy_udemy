@@ -1,5 +1,7 @@
 package ovh.major.testyudemy;
 
+import ovh.major.testyudemy.order.Order;
+
 import java.util.ArrayList;
 import java.util.List;
 

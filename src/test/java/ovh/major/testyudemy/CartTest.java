@@ -3,6 +3,7 @@ package ovh.major.testyudemy;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ovh.major.testyudemy.order.Order;
 
 import java.time.Duration;
 import java.util.List;

@@ -1,4 +1,6 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.order;
+
+import ovh.major.testyudemy.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,15 @@ public class Order {
 
     public void cancel() {
         this.meals.clear();
+    }
+
+    int totalPrice() {
+        int sum =  this.meals.stream().mapToInt(Meal::getPrice).sum();
+        if (sum<0) {
+            throw new IllegalArgumentException("Price Limit exceeded");
+        } else {
+            return sum;
+        }
     }
 
     @Override

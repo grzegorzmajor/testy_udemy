@@ -1,4 +1,4 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.order;
 
 public enum OrderStatus {
     ORDERED,

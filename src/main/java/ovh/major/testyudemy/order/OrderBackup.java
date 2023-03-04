@@ -1,4 +1,4 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.order;
 
 import java.io.*;
 
@@ -13,6 +13,11 @@ public class OrderBackup {
     }
 
     void backupOrder(Order order) throws IOException {
+
+        if (writer == null ) {
+            throw new IOException("Backup File Not Created!");
+        }
+
         writer.append(order.toString());
     }
     void closeFile() throws IOException {

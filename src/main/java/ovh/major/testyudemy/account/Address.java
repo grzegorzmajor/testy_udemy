@@ -1,4 +1,4 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.account;
 
 public class Address {
     private String street;

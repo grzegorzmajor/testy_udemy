@@ -1,4 +1,4 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.account;
 
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -81,6 +81,17 @@ class AccountHamcrestTest {
         assumingThat(address != null, () -> {
             assertTrue(account.isActive());
         });
+    }
+
+    @Test
+    void invalidEmailShouldThrowException() {
+
+        //given
+        Account account = new Account();
+
+        //when
+        //then
+        assertThrows(IllegalArgumentException.class, () -> account.setEmail("wrongEmail"));
     }
 }
 

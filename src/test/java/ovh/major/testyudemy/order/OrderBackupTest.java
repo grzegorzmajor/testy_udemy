@@ -1,6 +1,7 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.order;
 
 import org.junit.jupiter.api.*;
+import ovh.major.testyudemy.Meal;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class OrderBackupTest {
     void backupOrderWithOneMeal() throws IOException {
         //given
         Meal meal =  new Meal(12, "Coffee");
-        Order order = new Order();
+        ovh.major.testyudemy.order.Order order = new Order();
         order.addMealToOrder(meal);
 
         //when
