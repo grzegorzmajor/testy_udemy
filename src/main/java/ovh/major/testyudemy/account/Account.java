@@ -16,7 +16,6 @@ public class Account {
         } else {
             this.active = false;
         }
-
     }
 
     public void activate() {
