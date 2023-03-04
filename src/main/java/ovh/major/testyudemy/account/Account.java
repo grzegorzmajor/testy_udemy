@@ -35,6 +35,10 @@ public class Account {
         this.defaultDeliveryAddress = defaultDeliveryAddress;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
     public void setEmail(String email) {
         if (email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
             this.email = email;

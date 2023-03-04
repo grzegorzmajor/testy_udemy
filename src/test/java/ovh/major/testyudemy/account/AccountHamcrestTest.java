@@ -93,5 +93,19 @@ class AccountHamcrestTest {
         //then
         assertThrows(IllegalArgumentException.class, () -> account.setEmail("wrongEmail"));
     }
+
+
+    @Test
+    void validEmailShouldThrowException() {
+
+        //given
+        Account account = new Account();
+
+        //when
+        account.setEmail("ludzik@domena.pl");
+
+        //then
+        assertThat(account.getEmail(), is(equalTo("ludzik@domena.pl")));
+    }
 }
 
