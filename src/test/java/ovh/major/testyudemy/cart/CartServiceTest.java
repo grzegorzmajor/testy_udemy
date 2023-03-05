@@ -5,6 +5,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import ovh.major.testyudemy.order.Order;
 import ovh.major.testyudemy.order.OrderStatus;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -34,16 +35,16 @@ public class CartServiceTest {
         verify(cartHandler).sendToPrepare(cart);
         then(cartHandler).should().sendToPrepare(cart); //bbd
 
-        verify(cartHandler,times(1)).sendToPrepare(cart);
-        verify(cartHandler,atLeastOnce()).sendToPrepare(cart);
+        verify(cartHandler, times(1)).sendToPrepare(cart);
+        verify(cartHandler, atLeastOnce()).sendToPrepare(cart);
 
-            //poniżej test kolejności wykonania metod
+        //poniżej test kolejności wykonania metod
         InOrder inOrder = inOrder(cartHandler);
         inOrder.verify(cartHandler).canHandleCart(cart);
         inOrder.verify(cartHandler).sendToPrepare(cart);
 
-        assertThat(resultCart.getOrders(),hasSize(1));
-        assertThat(resultCart.getOrders().get(0).getOrderStatus(),equalTo(OrderStatus.PREPARING));
+        assertThat(resultCart.getOrders(), hasSize(1));
+        assertThat(resultCart.getOrders().get(0).getOrderStatus(), equalTo(OrderStatus.PREPARING));
     }
 
     @Test
@@ -62,10 +63,10 @@ public class CartServiceTest {
         Cart resultCart = cartService.processCart(cart);
 
         //then
-        verify(cartHandler,never()).sendToPrepare(cart);
+        verify(cartHandler, never()).sendToPrepare(cart);
         then(cartHandler).should(never()).sendToPrepare(cart); //bbd
-        assertThat(resultCart.getOrders(),hasSize(1));
-        assertThat(resultCart.getOrders().get(0).getOrderStatus(),equalTo(OrderStatus.REJECTED));
+        assertThat(resultCart.getOrders(), hasSize(1));
+        assertThat(resultCart.getOrders().get(0).getOrderStatus(), equalTo(OrderStatus.REJECTED));
     }
 
 
@@ -86,10 +87,10 @@ public class CartServiceTest {
         Cart resultCart = cartService.processCart(cart);
 
         //then
-        verify(cartHandler,never()).sendToPrepare(any(Cart.class));
+        verify(cartHandler, never()).sendToPrepare(any(Cart.class));
         then(cartHandler).should(never()).sendToPrepare(any(Cart.class)); //bbd
-        assertThat(resultCart.getOrders(),hasSize(1));
-        assertThat(resultCart.getOrders().get(0).getOrderStatus(),equalTo(OrderStatus.REJECTED));
+        assertThat(resultCart.getOrders(), hasSize(1));
+        assertThat(resultCart.getOrders().get(0).getOrderStatus(), equalTo(OrderStatus.REJECTED));
     }
 
     @Test
@@ -107,10 +108,10 @@ public class CartServiceTest {
         //when
 
         //then
-        assertThat(cartHandler.canHandleCart(cart),equalTo(true));
-        assertThat(cartHandler.canHandleCart(cart),equalTo(false));
-        assertThat(cartHandler.canHandleCart(cart),equalTo(false));
-        assertThat(cartHandler.canHandleCart(cart),equalTo(true));
+        assertThat(cartHandler.canHandleCart(cart), equalTo(true));
+        assertThat(cartHandler.canHandleCart(cart), equalTo(false));
+        assertThat(cartHandler.canHandleCart(cart), equalTo(false));
+        assertThat(cartHandler.canHandleCart(cart), equalTo(true));
 
     }
 
@@ -126,15 +127,15 @@ public class CartServiceTest {
         CartHandler cartHandler = mock(CartHandler.class);
         CartService cartService = new CartService(cartHandler);
 
-        given(cartHandler.canHandleCart(argThat(c -> c.getOrders().size() >0 ))).willReturn(true);
+        given(cartHandler.canHandleCart(argThat(c -> c.getOrders().size() > 0))).willReturn(true);
 
         //when
         Cart resultCart = cartService.processCart(cart);
 
         //then
         then(cartHandler).should().sendToPrepare(cart); //bbd
-        assertThat(resultCart.getOrders(),hasSize(1));
-        assertThat(resultCart.getOrders().get(0).getOrderStatus(),equalTo(OrderStatus.PREPARING));
+        assertThat(resultCart.getOrders(), hasSize(1));
+        assertThat(resultCart.getOrders().get(0).getOrderStatus(), equalTo(OrderStatus.PREPARING));
     }
 
     @Test
@@ -179,10 +180,10 @@ public class CartServiceTest {
         //then
         //verify(cartHandler).sendToPrepare(argumentCaptor.capture());
         then(cartHandler).should().sendToPrepare(argumentCaptor.capture());
-        assertThat(argumentCaptor.getValue().getOrders().size(),equalTo(1));
+        assertThat(argumentCaptor.getValue().getOrders().size(), equalTo(1));
 
-        assertThat(resultCart.getOrders(),hasSize(1));
-        assertThat(resultCart.getOrders().get(0).getOrderStatus(),equalTo(OrderStatus.PREPARING));
+        assertThat(resultCart.getOrders(), hasSize(1));
+        assertThat(resultCart.getOrders().get(0).getOrderStatus(), equalTo(OrderStatus.PREPARING));
     }
 
 

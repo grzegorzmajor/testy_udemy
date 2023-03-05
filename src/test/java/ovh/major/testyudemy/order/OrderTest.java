@@ -17,7 +17,8 @@ public class OrderTest {
 
     private Order order;
 
-    @BeforeEach //w junit4 bez after
+    @BeforeEach
+        //w junit4 bez after
     void initializeOrder() {
         order = new Order();
     }
@@ -123,14 +124,15 @@ public class OrderTest {
     }
 
     @Test
-    void emptyOrderTotalPriceShouldEqualZero()  {
+    void emptyOrderTotalPriceShouldEqualZero() {
         //given
         //order is created in beforeEach
 
         //that
-        assertThat(order.totalPrice(),is(0));
+        assertThat(order.totalPrice(), is(0));
 
     }
+
     @Test
     void cancelingOrderShouldRemoveAllItemsFromList() {
 
@@ -144,7 +146,7 @@ public class OrderTest {
         order.cancel();
 
         //then
-        assertThat(order.getMeals().size(),is(0));
+        assertThat(order.getMeals().size(), is(0));
 
     }
 

@@ -15,6 +15,12 @@ public class OrderBackupTest {
         orderBackup = new OrderBackup();
         orderBackup.createFile();
     }
+
+    @AfterAll
+    static void tearDown() throws IOException {
+        orderBackup.closeFile();
+    }
+
     @BeforeEach
     void appendAtTheStartOfTheLine() throws IOException {
         orderBackup.getWriter().append("New order: ");
@@ -28,7 +34,7 @@ public class OrderBackupTest {
     @Test
     void backupOrderWithOneMeal() throws IOException {
         //given
-        Meal meal =  new Meal(12, "Coffee");
+        Meal meal = new Meal(12, "Coffee");
         ovh.major.testyudemy.order.Order order = new Order();
         order.addMealToOrder(meal);
 
@@ -38,9 +44,5 @@ public class OrderBackupTest {
         //then
         System.out.println(order.toString());
 
-    }
-    @AfterAll
-    static void tearDown() throws IOException {
-        orderBackup.closeFile();
     }
 }

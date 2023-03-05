@@ -54,12 +54,12 @@ public class CartTest {
         ));
 
         assertAll("This is group of assertion for cart",
-                () -> assertThat(cart.getOrders(),notNullValue()),
-                () -> assertThat(cart.getOrders(),hasSize(1)),
-                () -> assertThat(cart.getOrders(),is(not(empty()))),
-                () -> assertThat(cart.getOrders(),is(not(emptyCollectionOf(Order.class)))),
-                () -> assertThat(cart.getOrders().get(0).getMeals(),empty()),
-                ()-> {
+                () -> assertThat(cart.getOrders(), notNullValue()),
+                () -> assertThat(cart.getOrders(), hasSize(1)),
+                () -> assertThat(cart.getOrders(), is(not(empty()))),
+                () -> assertThat(cart.getOrders(), is(not(emptyCollectionOf(Order.class)))),
+                () -> assertThat(cart.getOrders().get(0).getMeals(), empty()),
+                () -> {
                     List<Meal> mealList = cart.getOrders().get(0).getMeals();
                     assertThat(mealList, empty());
                 }

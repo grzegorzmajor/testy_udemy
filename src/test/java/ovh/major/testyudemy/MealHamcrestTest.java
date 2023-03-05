@@ -114,17 +114,17 @@ class MealHamcrestTest {
     @TestFactory
     Collection<DynamicTest> calculateMealPrices() {
         Order order = new Order();
-        order.addMealToOrder(new Meal(10,2,"Hamburger"));
-        order.addMealToOrder(new Meal(7,4,"Fries"));
-        order.addMealToOrder(new Meal(22,3,"Pizza"));
+        order.addMealToOrder(new Meal(10, 2, "Hamburger"));
+        order.addMealToOrder(new Meal(7, 4, "Fries"));
+        order.addMealToOrder(new Meal(22, 3, "Pizza"));
 
         Collection<DynamicTest> dynamicTests = new ArrayList<>();
-        for (int i =0; i<order.getMeals().size();i++) {
+        for (int i = 0; i < order.getMeals().size(); i++) {
             int price = order.getMeals().get(i).getPrice();
             int quantity = order.getMeals().get(i).getQuantity();
 
             Executable executable = () -> {
-                assertThat(calculatePrice(price,quantity),lessThan(67));
+                assertThat(calculatePrice(price, quantity), lessThan(67));
             };
             String name = "Test name: " + i;
             DynamicTest dynamicTest = DynamicTest.dynamicTest(name, executable);
