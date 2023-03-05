@@ -1,8 +1,9 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.cart;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ovh.major.testyudemy.Meal;
 import ovh.major.testyudemy.order.Order;
 
 import java.time.Duration;

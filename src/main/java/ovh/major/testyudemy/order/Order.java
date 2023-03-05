@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private List<Meal> meals = new ArrayList<>();
+
+    private OrderStatus orderStatus;
+    private final List<Meal> meals = new ArrayList<>();
 
     public void addMealToOrder(Meal meal) {
         this.meals.add(meal);
@@ -19,6 +21,14 @@ public class Order {
 
     public List<Meal> getMeals() {
         return meals;
+    }
+
+    public void changeOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 
     public void cancel() {

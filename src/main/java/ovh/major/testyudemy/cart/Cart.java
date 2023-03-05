@@ -1,12 +1,13 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.cart;
 
+import ovh.major.testyudemy.Meal;
 import ovh.major.testyudemy.order.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private List<Order> orders = new ArrayList<>();
+    private final List<Order> orders = new ArrayList<>();
 
     public List<Order> getOrders() {
         return orders;
