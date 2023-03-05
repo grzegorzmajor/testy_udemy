@@ -1,6 +1,7 @@
 package ovh.major.testyudemy.cart;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import ovh.major.testyudemy.order.Order;
 import ovh.major.testyudemy.order.OrderStatus;
@@ -152,6 +153,36 @@ public class CartServiceTest {
         //when
         //then
         assertThrows(IllegalArgumentException.class, () -> cartService.processCart(cart));
+    }
+
+    @Test
+    void processCartShouldSendToPrepareWithArgumentCaptor() {
+
+        // poprzednio sprawdzalismy czy dana metoda została wywołana na danym mocku
+        // argumentCaptor - możemy sprawdzić z jakimi argumentami została wywołana metoda
+
+        //given
+        Order order = new Order();
+        Cart cart = new Cart();
+        cart.addOrderToCart(order);
+
+        CartHandler cartHandler = mock(CartHandler.class);
+        CartService cartService = new CartService(cartHandler);
+
+        ArgumentCaptor<Cart> argumentCaptor = ArgumentCaptor.forClass(Cart.class);
+
+        given(cartHandler.canHandleCart(cart)).willReturn(true);
+
+        //when
+        Cart resultCart = cartService.processCart(cart);
+
+        //then
+        //verify(cartHandler).sendToPrepare(argumentCaptor.capture());
+        then(cartHandler).should().sendToPrepare(argumentCaptor.capture());
+        assertThat(argumentCaptor.getValue().getOrders().size(),equalTo(1));
+
+        assertThat(resultCart.getOrders(),hasSize(1));
+        assertThat(resultCart.getOrders().get(0).getOrderStatus(),equalTo(OrderStatus.PREPARING));
     }
 
 
