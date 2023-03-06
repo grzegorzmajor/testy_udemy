@@ -1,15 +1,19 @@
 package ovh.major.testyudemy.account;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
+@MockitoSettings(strictness = Strictness.STRICT_STUBS)
 class AccountServiceMockTest {
 
     @Test
@@ -57,6 +61,22 @@ class AccountServiceMockTest {
         Account account3 = new Account(address2);
 
         return Arrays.asList(account1, account2, account3);
+    }
+
+    @Test
+    void getAccountsByName() {
+
+        //given
+        AccountRepository accountRepository = mock(AccountRepository.class);
+        AccountService accountService = new AccountService(accountRepository);
+        given(accountRepository.getByName("dawid")).willReturn(List.of("nowak"));
+
+        //when
+        List<String> accountNames = accountService.findByName("dawid");
+
+        //then
+        assertThat(accountNames,contains("nowak"));
+
     }
 
 }
