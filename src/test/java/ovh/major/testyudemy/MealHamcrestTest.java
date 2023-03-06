@@ -3,11 +3,14 @@ package ovh.major.testyudemy;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ovh.major.testyudemy.order.Order;
 
 import java.util.ArrayList;
@@ -20,10 +23,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 
 class MealHamcrestTest {
 
+    @Spy
+    private Meal mealSpy;
 
     private static Stream<Arguments> createMealsWithNameAndPrice() {
         return Stream.of(Arguments.of("Hamburger", 10), Arguments.of("Cheseburger", 12));
@@ -97,7 +104,7 @@ class MealHamcrestTest {
     }
 
     @ParameterizedTest
-    @MethodSource("createMealsWithNameAndPrice()")
+    @MethodSource("createMealsWithNameAndPrice")
     void burgersShouldHAveCorrectNameAndPrice(String name, int price) {
         assertThat(name, containsString("burger"));
         assertThat(price, greaterThanOrEqualTo(10));
@@ -142,12 +149,38 @@ class MealHamcrestTest {
 
         given(meal.getPrice()).willReturn(15);
         given(meal.getQuantity()).willReturn(3);
+
         given(meal.sumPrice()).willCallRealMethod();
 
         //when
         int result = meal.sumPrice();
 
         //then
+        assertThat(result, equalTo(45));
+    }
+
+    @Test
+    @ExtendWith(MockitoExtension.class)
+    void testMealSumPriceWithSpy() {
+
+        //given
+        //przeniosiono - adnotacja @Spy
+        // Meal meal = spy(Meal.class);
+        // gdy chcemy weryfikować prawdziwe metody z klasy, wymaga konstruktora bez parametrowego
+        // można wcześniej stworzyć instancję tego obiektu z konstruktorem z parametrami
+        // i przekazać tą instancję do metody spy()
+
+        given(mealSpy.getPrice()).willReturn(15);
+        given(mealSpy.getQuantity()).willReturn(3);
+
+        //given(meal.sumPrice()).willCallRealMethod();
+
+        //when
+        int result = mealSpy.sumPrice();
+
+        //then
+        then(mealSpy).should().getPrice();
+        then(mealSpy).should().getQuantity();
         assertThat(result, equalTo(45));
     }
 

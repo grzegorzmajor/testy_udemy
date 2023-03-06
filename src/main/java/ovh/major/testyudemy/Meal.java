@@ -22,6 +22,9 @@ public class Meal {
         this.price = price;
     }
 
+    public Meal() {
+    }
+
     public int getPrice() {
         return price;
     }
