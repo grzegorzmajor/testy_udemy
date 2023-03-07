@@ -130,5 +130,23 @@ public class MealRepositoryTest {
         assertThat(result.size(), is(1));
 
     }
+    @Test
+    void shouldBeAbleToFindMealByExactPriceTwoArgumentMethod() {
+
+        //given
+        Meal meal = new Meal(10, "Pizza");
+        mealRepository.add(meal);
+        Meal meal2 = new Meal(16, "Pizza XXL");
+        mealRepository.add(meal2);
+        Meal meal3 = new Meal(8, "Hod Dog");
+        mealRepository.add(meal3);
+
+        //when
+        List<Meal> result = mealRepository.findByPrice(18, PriceCondition.EXACT);
+
+        //then
+        assertThat(result.size(), is(1));
+
+    }
 
 }
