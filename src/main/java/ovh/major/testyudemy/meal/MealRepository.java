@@ -37,6 +37,10 @@ public class MealRepository {
                 result = meals.stream().filter(meal -> meal.getPrice() < price)
                             .collect(Collectors.toList());
             }
+            case HIGHER -> {
+                result = meals.stream().filter(meal -> meal.getPrice() > price)
+                        .collect(Collectors.toList());
+            }
         }
         return result;
     }
