@@ -63,7 +63,23 @@ public class MealRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToFindMealByPrice() {
+    void shouldBeAbleToFindMealBeStartingLetters() {
+
+        //given
+        Meal meal = new Meal(10, "Pizza");
+        mealRepository.add(meal);
+        Meal meal2 = new Meal(10, "Pi");
+        mealRepository.add(meal2);
+
+        //when
+        List<Meal> result = mealRepository.findByName("Pi", false);
+
+        //then
+        assertThat(result.size(), is(2));
+    }
+
+    @Test
+    void shouldBeAbleToFindMealByExactPrice() {
 
         //given
         Meal meal = new Meal(10, "Pizza");
@@ -78,19 +94,22 @@ public class MealRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToFindMealBeStartingLetters() {
+    void shouldBeAbleToFindMealByLowerPrice() {
 
         //given
         Meal meal = new Meal(10, "Pizza");
         mealRepository.add(meal);
-        Meal meal2 = new Meal(10, "Pi");
+        Meal meal2 = new Meal(16, "Pizza XXL");
         mealRepository.add(meal2);
+        Meal meal3 = new Meal(8, "Hod Dog");
+        mealRepository.add(meal3);
 
         //when
-        List<Meal> result = mealRepository.findByName("Pi", false);
+        List<Meal> result = mealRepository.findByPrice(11, PriceCondition.LOWER);
 
         //then
         assertThat(result.size(), is(2));
+
     }
 
 }

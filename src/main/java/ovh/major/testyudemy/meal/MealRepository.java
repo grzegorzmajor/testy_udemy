@@ -29,4 +29,8 @@ public class MealRepository {
         return meals.stream().filter(meal -> meal.getPrice() == price)
                 .collect(Collectors.toList());
     }
+
+    public List<Meal> findByPrice(int price, PriceCondition condition) {
+        return null;
+    }
 }
