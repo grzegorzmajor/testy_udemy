@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ovh.major.testyudemy.meal.Meal;
 import ovh.major.testyudemy.order.Order;
 
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 
 class MealHamcrestTest {
 
