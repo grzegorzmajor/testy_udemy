@@ -31,6 +31,13 @@ public class MealRepository {
     }
 
     public List<Meal> findByPrice(int price, PriceCondition condition) {
-        return null;
+        List<Meal> result = null;
+        switch (condition) {
+            case LOWER -> {
+                result = meals.stream().filter(meal -> meal.getPrice() < price)
+                            .collect(Collectors.toList());
+            }
+        }
+        return result;
     }
 }

@@ -79,7 +79,7 @@ public class MealRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToFindMealByExactPrice() {
+    void shouldBeAbleToFindMealByExactPriceSingleArgumentMethod() {
 
         //given
         Meal meal = new Meal(10, "Pizza");
@@ -94,7 +94,7 @@ public class MealRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToFindMealByLowerPrice() {
+    void shouldBeAbleToFindMealByLowerPriceTwoArgumentMethod() {
 
         //given
         Meal meal = new Meal(10, "Pizza");
