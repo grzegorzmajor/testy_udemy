@@ -142,7 +142,7 @@ public class MealRepositoryTest {
         mealRepository.add(meal3);
 
         //when
-        List<Meal> result = mealRepository.findByPrice(18, PriceCondition.EXACT);
+        List<Meal> result = mealRepository.findByPrice(8, PriceCondition.EXACT);
 
         //then
         assertThat(result.size(), is(1));
