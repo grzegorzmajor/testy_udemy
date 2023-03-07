@@ -20,8 +20,8 @@ public class MealRepository {
         this.meals.remove(meal);
     }
 
-    public List<Meal> findByName(String name) {
-        return meals.stream().filter(meal -> meal.getName().equals(name))
+    public List<Meal> findByName(String name, boolean exactName) {
+        return meals.stream().filter(meal -> exactName ? meal.getName().equals(name) : meal.getName().startsWith(name))
                 .collect(Collectors.toList());
     }
 
