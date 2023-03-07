@@ -26,8 +26,7 @@ public class MealRepository {
     }
 
     public List<Meal> findByPrice(int price) {
-        return meals.stream().filter(meal -> meal.getPrice() == price)
-                .collect(Collectors.toList());
+        return findByPrice(price, PriceCondition.EXACT);
     }
 
     public List<Meal> findByPrice(int price, PriceCondition condition) {
