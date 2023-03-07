@@ -1,7 +1,7 @@
 package ovh.major.testyudemy.order;
 
 import org.junit.jupiter.api.*;
-import ovh.major.testyudemy.Meal;
+import ovh.major.testyudemy.meal.Meal;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

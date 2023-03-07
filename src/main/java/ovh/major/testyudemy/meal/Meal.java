@@ -1,4 +1,4 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.meal;
 
 import java.util.Objects;
 
@@ -20,9 +20,6 @@ public class Meal {
 
     public Meal(int price) {
         this.price = price;
-    }
-
-    public Meal() {
     }
 
     public int getPrice() {

@@ -1,6 +1,7 @@
-package ovh.major.testyudemy;
+package ovh.major.testyudemy.meal;
 
 import org.junit.jupiter.api.Test;
+import ovh.major.testyudemy.meal.Meal;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;

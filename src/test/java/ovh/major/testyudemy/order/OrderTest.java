@@ -4,7 +4,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ovh.major.testyudemy.Meal;
+import ovh.major.testyudemy.meal.Meal;
 
 import java.util.Arrays;
 import java.util.List;

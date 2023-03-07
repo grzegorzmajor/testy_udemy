@@ -1,6 +1,6 @@
 package ovh.major.testyudemy.cart;
 
-import ovh.major.testyudemy.Meal;
+import ovh.major.testyudemy.meal.Meal;
 import ovh.major.testyudemy.order.Order;
 
 import java.util.ArrayList;
