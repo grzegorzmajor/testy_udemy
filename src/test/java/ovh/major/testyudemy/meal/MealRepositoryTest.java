@@ -190,7 +190,16 @@ public class MealRepositoryTest {
 
     @ParameterizedTest
     @CsvSource({
-            "10, 'Pizza', EXACT, 10, 'Pi', false, 1"
+            "10, 'Pizza', EXACT, 10, 'Pi', false, 1",
+            "15, 'Pizza', EXACT, 10, 'Pi', false, 0",
+            "10, 'Pizza XXL', LOWER, 11, 'Pi', false, 1",
+            "10, 'Pizza XXL', HIGHER, 11, 'Pi', false, 0",
+            "20, 'Pizza XXL', HIGHER, 11, 'Pi', false, 1",
+            "20, 'Pizza XXL', HIGHER, 11, 'Pi', true, 0",
+            "20, 'Burger', HIGHER, 11, 'Pi', false, 0",
+            "20, 'Burger', LOWER, 11, 'B', true, 0",
+            "20, 'Burger', EXACT, 11, 'B', true, 0",
+            "11, 'Parówki', EXACT, 11, 'Parówki', true, 1",
     })
     void shouldBeReturnedListWithMealIfItMatchesTheConditionFindMethod(
             int price,
@@ -212,6 +221,7 @@ public class MealRepositoryTest {
         //then
         assertAll(
                 () -> assertThat(result.size(), is(resultSize)),
+                () -> assertThat(result, resultSize == 1 ? contains(meal) : not(contains(meal))),
                 () -> assertThat(result.size(), is(notNullValue()))
         );
 
