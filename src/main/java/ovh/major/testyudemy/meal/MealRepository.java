@@ -47,4 +47,29 @@ public class MealRepository {
         }
         return result;
     }
+
+    public List<Meal> find(String name, boolean exactName, int price, PriceCondition condition) {
+        List<Meal> result = null;
+        switch (condition) {
+            case LOWER -> {
+                result = meals.stream().filter(
+                        meal -> ( meal.getPrice() < price )
+                                && ( exactName ? meal.getName().equals(name) : meal.getName().startsWith(name) ) )
+                        .collect(Collectors.toList());
+            }
+            case HIGHER -> {
+                result = meals.stream().filter(
+                        meal -> (meal.getPrice() > price)
+                                && ( exactName ? meal.getName().equals(name) : meal.getName().startsWith(name) ) )
+                        .collect(Collectors.toList());
+            }
+            case EXACT -> {
+                result = meals.stream().filter(
+                        meal -> (meal.getPrice() == price)
+                                && ( exactName ? meal.getName().equals(name) : meal.getName().startsWith(name) ) )
+                        .collect(Collectors.toList());
+            }
+        }
+        return result;
+    }
 }

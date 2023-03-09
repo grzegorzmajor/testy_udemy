@@ -82,7 +82,7 @@ public class MealRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToFindMealByExactPriceSingleArgumentMethod() {
+    void shouldBeAbleToFindMealByExactPriceSingleArgumentFindByPriceMethod() {
 
         //given
         Meal meal = new Meal(10, "Pizza");
@@ -97,7 +97,7 @@ public class MealRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToFindMealByLowerPriceTwoArgumentMethod() {
+    void shouldBeAbleToFindMealByLowerPriceTwoArgumentFindByPriceMethod() {
 
         //given
         Meal meal = new Meal(10, "Pizza");
@@ -116,7 +116,7 @@ public class MealRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToFindMealByHigherPriceTwoArgumentMethod() {
+    void shouldBeAbleToFindMealByHigherPriceTwoArgumentFindByPriceMethod() {
 
         //given
         Meal meal = new Meal(10, "Pizza");
@@ -135,7 +135,7 @@ public class MealRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToFindMealByExactPriceTwoArgumentMethod() {
+    void shouldBeAbleToFindMealByExactPriceTwoArgumentFindByPriceMethod() {
 
         //given
         Meal meal = new Meal(10, "Pizza");
@@ -166,7 +166,13 @@ public class MealRepositoryTest {
             "8, 'Hot Dog', HIGHER, 8, 0",
 
     })
-    void shouldBeReturnedListWithMealIfItMatchesTheCondition(int price, String name, PriceCondition priceCondition, int searchPrice, int resultSize) {
+    void shouldBeReturnedListWithMealIfItMatchesTheConditionTwoArgumentFindByPriceMethod(
+            int price,
+            String name,
+            PriceCondition priceCondition,
+            int searchPrice,
+            int resultSize
+    ) {
 
         //given
         Meal meal = new Meal(price, name);
@@ -181,5 +187,36 @@ public class MealRepositoryTest {
                 () -> assertThat(result, resultSize == 1 ? contains(meal) : not(contains(meal)))
         );
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "10, 'Pizza', EXACT, 10, 'Pi', false, 1"
+    })
+    void shouldBeReturnedListWithMealIfItMatchesTheConditionFindMethod(
+            int price,
+            String name,
+            PriceCondition priceCondition,
+            int searchPrice,
+            String searchName,
+            boolean exactName,
+            int resultSize
+    ) {
+
+        //given
+        Meal meal = new Meal(price, name);
+        mealRepository.add(meal);
+
+        //when
+        List<Meal> result = mealRepository.find(searchName,exactName,searchPrice,priceCondition);
+
+        //then
+        assertAll(
+                () -> assertThat(result.size(), is(resultSize)),
+                () -> assertThat(result.size(), is(notNullValue()))
+        );
+
+
+    }
+
 
 }
