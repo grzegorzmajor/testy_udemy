@@ -184,7 +184,8 @@ public class MealRepositoryTest {
         //then
         assertAll(
                 () -> assertThat(result.size(), is(resultSize)),
-                () -> assertThat(result, resultSize == 1 ? contains(meal) : not(contains(meal)))
+                () -> assertThat(result, resultSize == 1 ? contains(meal) : not(contains(meal))),
+                () -> assertThat(result.size(), is(notNullValue()))
         );
     }
 
